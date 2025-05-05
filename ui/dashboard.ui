@@ -21,10 +21,10 @@
    <widget class="QPushButton" name="productBtn">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>130</y>
-      <width>111</width>
-      <height>81</height>
+      <width>261</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -40,10 +40,10 @@ font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
    <widget class="QPushButton" name="salesreportBtn">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>230</y>
-      <width>111</width>
-      <height>81</height>
+      <x>100</x>
+      <y>270</y>
+      <width>261</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -59,10 +59,10 @@ font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
    <widget class="QPushButton" name="makeorderBtn">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>130</y>
-      <width>111</width>
-      <height>81</height>
+      <x>100</x>
+      <y>200</y>
+      <width>261</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -75,29 +75,10 @@ font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
      <string>Make Oder</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="storeBtn">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>230</y>
-      <width>111</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:rgb(66, 146, 198);
-border-radius:20px;
-color:rgb(251, 243, 242);
-font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Store</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>90</y>
       <width>261</width>
       <height>20</height>
@@ -114,7 +95,7 @@ font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
    <widget class="QComboBox" name="choices">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>20</x>
       <y>40</y>
       <width>101</width>
       <height>31</height>
@@ -142,6 +123,26 @@ border-radius: 8px;</string>
       <string/>
      </property>
     </item>
+   </widget>
+   <widget class="QLabel" name="dateTimeLabel">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>40</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
