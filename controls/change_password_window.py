@@ -4,26 +4,33 @@ import hashlib
 import os
 from db.db_functions import Database
 from db.config import db_config
+
+
 class ChangePasswordWindow(QDialog):
     def __init__(self, user_data, back_callback):
         super().__init__()
-        uic.loadUi("ui/change_password.ui", self)
+        uic.loadUi("ui/change_password.ui", self)        
         self.setWindowTitle("Change Password")
+        
+        #initialize the Database object with db_config
+        self.db = Database(db_config)
+        # Connect to the database
+        self.db.connect()
 
         self.user_data = user_data
         self.back_callback = back_callback
         self.verified = False
 
-        # UI Elements
+        #get widgets
         self.togglePasswordCheckbox: QCheckBox = self.findChild(QCheckBox, "togglePasswordCheckbox")
-        self.favoriteFood: QLineEdit = self.findChild(QLineEdit, "favoriteFood")
+        self.uniqueToken: QLineEdit = self.findChild(QLineEdit, "uniqueToken")
         self.newPassword: QLineEdit = self.findChild(QLineEdit, "newPassword")
         self.confirmPassword: QLineEdit = self.findChild(QLineEdit, "confirmPassword")
         self.verifyBtn: QPushButton = self.findChild(QPushButton, "verifyBtn")
         self.cancelBtn: QPushButton = self.findChild(QPushButton, "cancelBtn")
         self.saveBtn: QPushButton = self.findChild(QPushButton, "saveBtn")
 
-        # Password fields setup
+        #inputfields
         self.newPassword.setEchoMode(QLineEdit.EchoMode.Password)
         self.confirmPassword.setEchoMode(QLineEdit.EchoMode.Password)
         self.newPassword.setEnabled(False)
@@ -34,25 +41,21 @@ class ChangePasswordWindow(QDialog):
 
         self.saveBtn.setEnabled(False)
 
-        # Event connections
-        self.verifyBtn.clicked.connect(self.verify_favorite_food)
+        #button action
+        self.verifyBtn.clicked.connect(self.verify_unique_token)
         self.cancelBtn.clicked.connect(self.go_back)
         self.saveBtn.clicked.connect(self.verify_and_change_password)
         self.newPassword.textEdited.connect(self.check_verified)
         self.confirmPassword.textEdited.connect(self.check_verified)
 
-        # Database connection
-        self.db = db_config
-
-    def verify_favorite_food(self):
+    def verify_unique_token(self):
         self.togglePasswordCheckbox.setEnabled(True)
-        food_input = self.favoriteFood.text().strip()
+        token_input = self.uniqueToken.text().strip()
 
         try:
             username = self.user_data.get("username")
-
             result = self.db.execute_query(
-                "SELECT favoriteFood FROM user WHERE LOWER(username) = LOWER(?)",
+                "SELECT uniqueToken FROM user WHERE LOWER(username) = LOWER(?)",
                 (username,)
             )
 
@@ -61,20 +64,20 @@ class ChangePasswordWindow(QDialog):
                 return
 
             if len(result) == 0:
-                QMessageBox.critical(self, "Error", "User not found or no favorite food set.")
+                QMessageBox.critical(self, "Error", "User not found or no token set.")
                 return
 
-            stored_favfood = result[0]["favoriteFood"]
+            stored_token = result[0]["uniqueToken"]
 
-            if ":" not in stored_favfood:
-                QMessageBox.critical(self, "Error", "Stored favorite food format is invalid.")
+            if ":" not in stored_token:
+                QMessageBox.critical(self, "Error", "Stored token format is invalid.")
                 return
 
-            stored_hash, stored_salt = stored_favfood.split(":")
+            stored_hash, stored_salt = stored_token.split(":")
             salt_bytes = bytes.fromhex(stored_salt)
 
             hashed_input = hashlib.pbkdf2_hmac(
-                'sha256', food_input.encode('utf-8'), salt_bytes, 10000
+                'sha256', token_input.encode('utf-8'), salt_bytes, 10000
             ).hex()
 
             if hashed_input == stored_hash:
@@ -87,7 +90,7 @@ class ChangePasswordWindow(QDialog):
                 self.verified = False
                 self.clear_password_fields()
                 self.saveBtn.setEnabled(False)
-                QMessageBox.critical(self, "Error", "Favorite food does not match.")
+                QMessageBox.critical(self, "Error", "Token does not match.")
 
         except Exception as e:
             QMessageBox.critical(self, "Database Error", str(e))
@@ -95,13 +98,13 @@ class ChangePasswordWindow(QDialog):
 
     def check_verified(self):
         if not self.verified:
-            QMessageBox.warning(self, "Verification Required", "Please verify your favorite food first.")
+            QMessageBox.warning(self, "Verification Required", "Please verify your unique token first.")
             self.clear_password_fields()
             self.saveBtn.setEnabled(False)
 
     def verify_and_change_password(self):
         if not self.verified:
-            QMessageBox.warning(self, "Verification Required", "Please verify your favorite food first.")
+            QMessageBox.warning(self, "Verification Required", "Please verify your unique token first.")
             return
 
         new_password = self.newPassword.text().strip()
@@ -139,7 +142,6 @@ class ChangePasswordWindow(QDialog):
         self.confirmPassword.setEnabled(False)
         self.togglePasswordCheckbox.setEnabled(False)
         self.togglePasswordCheckbox.setChecked(False)
-        self.passwords_visible = False
 
     def toggle_password_visibility(self, checked):
         mode = QLineEdit.EchoMode.Normal if checked else QLineEdit.EchoMode.Password
@@ -147,7 +149,7 @@ class ChangePasswordWindow(QDialog):
         self.confirmPassword.setEchoMode(mode)
 
     def clear_fields(self):
-        self.favoriteFood.clear()
+        self.uniqueToken.clear()
         self.clear_password_fields()
         self.verified = False
         self.saveBtn.setEnabled(False)
