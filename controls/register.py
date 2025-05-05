@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QMainWindow, QMessageBox, QApplication, QLineEdit
 from PyQt6.QtGui import QMouseEvent
 from db.db_functions import Database
 from db.config import db_config
+
 class RegisterWindow(QMainWindow):
     def __init__(self, db_config):
         super().__init__()
@@ -14,16 +15,16 @@ class RegisterWindow(QMainWindow):
         self.db = Database(db_config)
         self.registerBtn.clicked.connect(self.register_user)
         self.loginBtn.clicked.connect(self.open_login_window)
-        self.favoriteFood.mousePressEvent = self.favorite_food_clicked
+        self.uniqueToken.mousePressEvent = self.unique_token_clicked
 
     def register_user(self):
         name = self.name.text().strip()
         username = self.username.text().strip()
         password = self.password.text()
         gender = self.gender.currentText()
-        favoriteFood = self.favoriteFood.text().strip()
+        unique_token = self.uniqueToken.text().strip()
 
-        if not name or not username or not password or not favoriteFood:
+        if not name or not username or not password or not unique_token:
             QMessageBox.warning(self, "Missing Info", "Please fill in all fields.")
             return
 
@@ -35,26 +36,26 @@ class RegisterWindow(QMainWindow):
                 QMessageBox.warning(self, "Error", "Username already exists.")
                 return
 
-            #hash password
+            # Hash password
             salt = os.urandom(16)
             encrypted_password = hashlib.pbkdf2_hmac(
                 'sha256', password.encode('utf-8'), salt, 10000
             )
             password_to_store = encrypted_password.hex() + ":" + salt.hex()
 
-            # hash din natin yung favorite food
-            favorite_food_salt = os.urandom(16)
-            encrypted_favorite_food = hashlib.pbkdf2_hmac(
-                'sha256', favoriteFood.encode('utf-8'), favorite_food_salt, 10000
+            # Hash unique token
+            token_salt = os.urandom(16)
+            encrypted_token = hashlib.pbkdf2_hmac(
+                'sha256', unique_token.encode('utf-8'), token_salt, 10000
             )
-            favorite_food_to_store = encrypted_favorite_food.hex() + ":" + favorite_food_salt.hex()
+            unique_token_to_store = encrypted_token.hex() + ":" + token_salt.hex()
 
-            #reg process
+            # Insert into database
             query = """
-                INSERT INTO user (name, username, password, gender, favoriteFood)
+                INSERT INTO user (name, username, password, gender, uniqueToken)
                 VALUES (?, ?, ?, ?, ?)
             """
-            params = (name, username, password_to_store, gender, favorite_food_to_store)
+            params = (name, username, password_to_store, gender, unique_token_to_store)
 
             if self.db.execute_non_query(query, params):
                 QMessageBox.information(self, "Success", "Account registered!")
@@ -72,13 +73,13 @@ class RegisterWindow(QMainWindow):
         self.login_window = LoginWindow(db)
         self.login_window.show()
         self.close()
-    
+
     def redirect_to_login(self):
         self.open_login_window()
 
-    def favorite_food_clicked(self, event: QMouseEvent):
+    def unique_token_clicked(self, event: QMouseEvent):
         QMessageBox.information(self, "Security Info", "This will be your authentication to change password later.")
-        QLineEdit.mousePressEvent(self.favoriteFood, event)
+        QLineEdit.mousePressEvent(self.uniqueToken, event)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
