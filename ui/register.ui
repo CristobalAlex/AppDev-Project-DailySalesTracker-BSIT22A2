@@ -217,7 +217,7 @@ background-color:rgb(33, 113, 181);</string>
      <string>Log In</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="favoriteFood">
+   <widget class="QLineEdit" name="uniqueToken">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -246,7 +246,7 @@ font-weight:bold;
 font-size:15px;</string>
     </property>
     <property name="text">
-     <string>Favorite food</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unique Token&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
