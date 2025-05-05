@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2025 at 08:36 PM
+-- Generation Time: May 05, 2025 at 08:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -38,18 +38,6 @@ CREATE TABLE `orders` (
   `orderDateTime` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`orderId`, `productId`, `userId`, `quantity`, `totalPrice`, `totalMoney`, `changeAmount`, `orderDateTime`) VALUES
-(6, 0, 9, 0, 22.00, 22.00, 11.00, '2025-04-22 00:35:55'),
-(7, 0, 9, 0, 46.00, 46.00, 4.00, '2025-04-22 00:51:58'),
-(8, 0, 9, 0, 10.00, 10.00, 40.00, '2025-04-22 01:06:08'),
-(9, 0, 9, 0, 40.00, 40.00, 19.00, '2025-04-22 01:09:33'),
-(10, 0, 9, 0, 10.00, 10.00, 212.00, '2025-05-01 21:02:42'),
-(11, 0, 9, 0, 80.00, 80.00, 320.00, '2025-05-04 02:14:48');
-
 -- --------------------------------------------------------
 
 --
@@ -64,21 +52,6 @@ CREATE TABLE `order_details` (
   `totalPrice` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`orderDetailId`, `orderId`, `productId`, `quantity`, `totalPrice`) VALUES
-(1, 6, 2, 1, 12.00),
-(2, 6, 4, 1, 10.00),
-(3, 7, 2, 1, 12.00),
-(4, 7, 3, 1, 34.00),
-(5, 8, 4, 1, 10.00),
-(6, 9, 5, 2, 40.00),
-(7, 10, 4, 1, 10.00),
-(8, 11, 2, 1, 12.00),
-(9, 11, 3, 2, 68.00);
-
 -- --------------------------------------------------------
 
 --
@@ -90,19 +63,9 @@ CREATE TABLE `products` (
   `productName` varchar(100) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock` int(11) NOT NULL,
-  `userId` int(11) NOT NULL
+  `userId` int(11) NOT NULL,
+  `purchasePrice` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`productId`, `productName`, `price`, `stock`, `userId`) VALUES
-(2, 'salmon', 12.00, 1, 9),
-(3, 'chocolate', 34.00, 3, 9),
-(4, 'Fries', 10.00, 1, 9),
-(5, 'dickies', 20.00, 10, 9),
-(6, 'ok', 5.00, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -117,15 +80,15 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `gender` enum('Male','Female','Other') DEFAULT NULL,
   `accountDateCreated` datetime DEFAULT current_timestamp(),
-  `favoriteFood` varchar(100) DEFAULT NULL
+  `uniqueToken` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userId`, `name`, `username`, `password`, `gender`, `accountDateCreated`, `favoriteFood`) VALUES
-(9, 'qq', 'qq', '8fe81faf0f191abc886edf805712cf4a25a26d079b398c05b7bc9eb447bbf0d0:765796f71b7ca375a6db0fda8f5ac317', 'Male', '2025-04-20 19:01:46', '11fe9c908a4afd786c0135206cbe6c1a56ec7732480fb5a3a3dbd6aa8bca5456:d03954280e9ecc79f47d06bfffa10dbd');
+INSERT INTO `user` (`userId`, `name`, `username`, `password`, `gender`, `accountDateCreated`, `uniqueToken`) VALUES
+(10, 'qq', 'qq', 'c8ddd19825b500117bb205c85d77efb6ef8aefb5887d7ad56dcc07c4e9071016:ebe9d82cf9ebe13b0e5f1480a184c034', 'Male', '2025-05-06 00:50:14', '6213d76667aed03b981d779aa3325bca54fba28de7bbac695d289c443c067754:cecfa38ee5ab5a1626e42918666fa302');
 
 --
 -- Indexes for dumped tables
@@ -133,7 +96,7 @@ INSERT INTO `user` (`userId`, `name`, `username`, `password`, `gender`, `account
 
 --
 -- Indexes for table `orders`
-
+--
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderId`),
   ADD KEY `userId` (`userId`),
@@ -169,25 +132,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
