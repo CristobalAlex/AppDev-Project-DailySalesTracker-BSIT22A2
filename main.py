@@ -24,7 +24,7 @@ class LoginWindow(QMainWindow):
             return
         try:
             self.db.connect()
-            user = self.db.execute_query("SELECT userId, name, username, password, gender, accountDateCreated, favoriteFood FROM user WHERE username = %s", (username,))            
+            user = self.db.execute_query("SELECT userId, name, username, password, gender, accountDateCreated, uniqueToken FROM user WHERE username = %s", (username,))            
             if not user:
                 QMessageBox.warning(self, "Error", f"Account '{username}' isn't registered.")
                 return
@@ -47,7 +47,7 @@ class LoginWindow(QMainWindow):
                     "password": user[0]["password"],
                     "gender": user[0].get("gender", "N/A"),
                     "accountDateCreated": user[0].get("accountDateCreated", "N/A"),
-                    "favoriteFood":user[0].get("favoriteFood", "N/A")
+                    "uniqueToken":user[0].get("uniqueToken", "N/A")
                 }
 
                 self.dashboard = DashboardWindow(user_data, self.db.config)
@@ -69,7 +69,7 @@ class LoginWindow(QMainWindow):
             "password": user_data["password"],
             "gender": user_data.get("gender", "Not Specified"),
             "accountDateCreated": user_data.get("accountDateCreated", "N/A"),
-            "favoriteFood":user_data.get("favoriteFood", "N/A")
+            "uniqueToken":user_data.get("uniqueToken", "N/A")
         }
         self.dashboard = DashboardWindow(user_data)
         self.dashboard.show()
