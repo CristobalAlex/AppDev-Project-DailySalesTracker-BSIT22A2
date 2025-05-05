@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
-    <height>486</height>
+    <width>837</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      <rect>
       <x>20</x>
       <y>260</y>
-      <width>601</width>
+      <width>621</width>
       <height>161</height>
      </rect>
     </property>
@@ -34,11 +34,6 @@ font: 75 8pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
     </property>
-    <column>
-     <property name="text">
-      <string>New Column</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>Order ID</string>
@@ -56,7 +51,7 @@ border-radius: 8px;</string>
     </column>
     <column>
      <property name="text">
-      <string>Total Sales</string>
+      <string>Total Retail Sales</string>
      </property>
     </column>
     <column>
@@ -110,7 +105,7 @@ background-color:rgb(255, 87, 87);</string>
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>601</width>
+      <width>621</width>
       <height>181</height>
      </rect>
     </property>
@@ -146,6 +141,125 @@ background-color:rgb(255, 87, 87);</string>
     </property>
     <property name="text">
      <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="totalPurchaseLabel">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>110</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>90</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Price Purchase&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="totalSalesLabel">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>180</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>160</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Retail Sales&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="totalIncomeLabel">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>250</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>230</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Income&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dateLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
