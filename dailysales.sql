@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 07:44 PM
+-- Generation Time: May 05, 2025 at 11:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -38,6 +38,13 @@ CREATE TABLE `orders` (
   `orderDateTime` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderId`, `productId`, `userId`, `quantity`, `totalPrice`, `totalMoney`, `changeAmount`, `orderDateTime`) VALUES
+(13, 0, 10, 0, 52.00, 52.00, 48.00, '2025-05-06 04:06:05');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,14 @@ CREATE TABLE `order_details` (
   `quantity` int(11) NOT NULL,
   `totalPrice` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`orderDetailId`, `orderId`, `productId`, `quantity`, `totalPrice`) VALUES
+(12, 13, 9, 2, 28.00),
+(13, 13, 10, 3, 24.00);
 
 -- --------------------------------------------------------
 
@@ -66,6 +81,14 @@ CREATE TABLE `products` (
   `userId` int(11) NOT NULL,
   `purchasePrice` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`productId`, `productName`, `price`, `stock`, `userId`, `purchasePrice`) VALUES
+(9, 'milk per piece', 14.00, 4, 10, 9.00),
+(10, 'shampoo per piece', 8.00, 6, 10, 5.60);
 
 -- --------------------------------------------------------
 
@@ -132,19 +155,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
