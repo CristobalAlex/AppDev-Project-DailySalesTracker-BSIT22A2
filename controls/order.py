@@ -39,10 +39,9 @@ class MakeOrderWindow(QMainWindow):
         self.reload_graphs_callback = reload_graphs_callback #callback to  sa update ng orders in graphs
         #searchproducts
         self.search_edit = self.findChild(QLineEdit, "searchEdit")
-        self.clear_search_button = self.findChild(QPushButton, "clearSearchButton")
-
+        self.search_edit.setClearButtonEnabled(True)#auto x
         self.search_edit.textChanged.connect(self.filter_product_table)
-        self.clear_search_button.clicked.connect(self.clear_search)
+
 
 
     def populate_product_table(self, search_text=""):
@@ -189,11 +188,6 @@ class MakeOrderWindow(QMainWindow):
     def filter_product_table(self):
         search_text = self.search_edit.text().strip()
         self.populate_product_table(search_text)
-
-    def clear_search(self):
-        self.search_edit.clear()
-        self.populate_product_table()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
