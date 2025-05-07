@@ -58,8 +58,8 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="totalAmountEdit">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>120</y>
+      <x>450</x>
+      <y>110</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -78,8 +78,8 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="changeEdit">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>250</y>
+      <x>450</x>
+      <y>240</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -98,8 +98,8 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>100</y>
+      <x>450</x>
+      <y>90</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -111,8 +111,8 @@ border-radius: 8px;</string>
    <widget class="QLineEdit" name="paymentEdit">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>190</y>
+      <x>450</x>
+      <y>180</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -128,8 +128,8 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>160</y>
+      <x>450</x>
+      <y>150</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -141,8 +141,8 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>230</y>
+      <x>450</x>
+      <y>220</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -189,6 +189,56 @@ background-color:rgb(255, 87, 87);</string>
     </property>
     <property name="text">
      <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="searchEdit">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>30</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 8pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clearSearchButton">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid rgb(28, 118, 143);
+font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+border-radius: 8px;
+color:rgb(251, 243, 242);
+background-color:rgb(255, 87, 87);</string>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search Product&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
