@@ -28,7 +28,7 @@ class MakeOrderWindow(QMainWindow):
 
         self.order_table.setColumnCount(4)
         self.order_table.setHorizontalHeaderLabels(["Product Name", "Price", "Stock", "Quantity"])
-        self.product_data = {}  # maps row index to product info
+        self.product_data = {}  #maps row index to product info
 
         self.populate_product_table()
 
@@ -37,12 +37,23 @@ class MakeOrderWindow(QMainWindow):
         self.cancel_button.clicked.connect(self.cancel_order)
 
         self.reload_graphs_callback = reload_graphs_callback #callback to  sa update ng orders in graphs
+        #searchproducts
+        self.search_edit = self.findChild(QLineEdit, "searchEdit")
+        self.clear_search_button = self.findChild(QPushButton, "clearSearchButton")
 
-    def populate_product_table(self):
+        self.search_edit.textChanged.connect(self.filter_product_table)
+        self.clear_search_button.clicked.connect(self.clear_search)
+
+
+    def populate_product_table(self, search_text=""):
         try:
             conn = mariadb.connect(**self.db_config)
             cursor = conn.cursor()
-            cursor.execute("SELECT productId, productName, price, stock FROM products WHERE userId = ?", (self.user_id,))
+            cursor.execute(
+    "SELECT productId, productName, price, stock FROM products WHERE userId = ? AND productName LIKE ?",
+    (self.user_id, f"%{search_text}%")
+)
+
             products = cursor.fetchall()
 
             self.order_table.setRowCount(0)
@@ -174,6 +185,14 @@ class MakeOrderWindow(QMainWindow):
     def cancel_order(self):
         self.close()
         self.dashboard_window.show()
+
+    def filter_product_table(self):
+        search_text = self.search_edit.text().strip()
+        self.populate_product_table(search_text)
+
+    def clear_search(self):
+        self.search_edit.clear()
+        self.populate_product_table()
 
 
 if __name__ == "__main__":
