@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
+    <width>643</width>
     <height>485</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>50</y>
       <width>621</width>
       <height>381</height>
      </rect>
@@ -69,7 +69,7 @@ border-radius: 8px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>430</y>
+      <y>440</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -83,6 +83,26 @@ background-color:rgb(255, 87, 87);</string>
     </property>
     <property name="text">
      <string>Cancel</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="searchInput">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 8pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
