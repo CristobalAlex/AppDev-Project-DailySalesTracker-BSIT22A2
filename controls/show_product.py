@@ -2,7 +2,8 @@ import mariadb
 import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import (
-    QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QPushButton, QMessageBox, QInputDialog
+    QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QPushButton,
+    QMessageBox, QInputDialog, QLineEdit
 )
 from db.config import db_config
 
@@ -14,20 +15,35 @@ class ShowProductsWindow(QMainWindow):
         self.db_config = db_config
 
         self.products_table = self.findChild(QTableWidget, "productsTable")
-        self.products_table.setRowCount(0)
         self.products_table.setColumnCount(6)
         self.products_table.setHorizontalHeaderLabels(["Product Name", "Price", "Stock", "Update Price", "Update Stock", "Remove"])
 
-        self.load_products()
+        # ✅ Search Input
+        self.search_input = self.findChild(QLineEdit, "searchInput")
+        if self.search_input:
+            self.search_input.setClearButtonEnabled(True)
+            self.search_input.textChanged.connect(self.search_products)
+
         self.cancel_btn = self.findChild(QPushButton, "cancelBtn")
         self.cancel_btn.clicked.connect(self.go_back)
-    def load_products(self):
+
+        self.load_products()  # Load all products initially
+
+    def search_products(self, text):
+        self.load_products(text)
+
+    def load_products(self, search_text=""):
         try:
             conn = mariadb.connect(**self.db_config)
             cursor = conn.cursor()
-            cursor.execute("SELECT productId, productName, price, stock FROM products WHERE userId = ?", (self.user_id,))
-            products = cursor.fetchall()
 
+            if search_text:
+                query = "SELECT productId, productName, price, stock FROM products WHERE userId = ? AND productName LIKE ?"
+                cursor.execute(query, (self.user_id, f"%{search_text}%"))
+            else:
+                cursor.execute("SELECT productId, productName, price, stock FROM products WHERE userId = ?", (self.user_id,))
+
+            products = cursor.fetchall()
             self.products_table.setRowCount(len(products))
 
             for row, product in enumerate(products):
@@ -50,10 +66,9 @@ class ShowProductsWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
         finally:
-            if 'conn' in locals():
-                if conn:
-                    cursor.close()
-                    conn.close()
+            if 'conn' in locals() and conn:
+                cursor.close()
+                conn.close()
 
     def update_price(self, product_id):
         price, ok = QInputDialog.getDouble(self, "Update Price", "Enter new price:")
@@ -63,14 +78,13 @@ class ShowProductsWindow(QMainWindow):
                 cursor = conn.cursor()
                 cursor.execute("UPDATE products SET price = ? WHERE productId = ?", (price, product_id))
                 conn.commit()
-                self.load_products()
+                self.load_products(self.search_input.text())
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
             finally:
-                if 'conn' in locals():
-                    if conn:
-                        cursor.close()
-                        conn.close()
+                if 'conn' in locals() and conn:
+                    cursor.close()
+                    conn.close()
 
     def update_stock(self, product_id):
         stock, ok = QInputDialog.getInt(self, "Update Stock", "Enter new stock:")
@@ -80,14 +94,13 @@ class ShowProductsWindow(QMainWindow):
                 cursor = conn.cursor()
                 cursor.execute("UPDATE products SET stock = ? WHERE productId = ?", (stock, product_id))
                 conn.commit()
-                self.load_products()
+                self.load_products(self.search_input.text())
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
             finally:
-                if 'conn' in locals():
-                    if conn:
-                        cursor.close()
-                        conn.close()
+                if 'conn' in locals() and conn:
+                    cursor.close()
+                    conn.close()
 
     def remove_product(self, product_id):
         reply = QMessageBox.question(self, "Remove Product", "Are you sure you want to remove this product?")
@@ -97,16 +110,17 @@ class ShowProductsWindow(QMainWindow):
                 cursor = conn.cursor()
                 cursor.execute("DELETE FROM products WHERE productId = ?", (product_id,))
                 conn.commit()
-                self.load_products()
+                self.load_products(self.search_input.text())
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
             finally:
-                if 'conn' in locals():
-                    if conn:
-                        cursor.close()
-                        conn.close()
+                if 'conn' in locals() and conn:
+                    cursor.close()
+                    conn.close()
+
     def go_back(self):
         self.close()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     user_id = 1
