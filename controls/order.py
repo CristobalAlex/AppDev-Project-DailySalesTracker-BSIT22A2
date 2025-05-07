@@ -2,12 +2,15 @@ from PyQt6.QtWidgets import (
     QMainWindow, QApplication, QLineEdit, QTableWidget, QTableWidgetItem,
     QPushButton, QMessageBox, QLabel, QSpinBox
 )
+from PyQt6.QtCore import Qt
+from decimal import Decimal, InvalidOperation
 import mariadb
 import sys
 from PyQt6 import uic
 from db.config import db_config
+
 class MakeOrderWindow(QMainWindow):
-    def __init__(self, user_id, db_config, dashboard_window):
+    def __init__(self, user_id, db_config, dashboard_window, reload_graphs_callback):
         super().__init__()
         uic.loadUi("ui/order.ui", self)
 
@@ -20,19 +23,22 @@ class MakeOrderWindow(QMainWindow):
         self.total_label = self.findChild(QLabel, "totalAmountEdit")
         self.payment_edit = self.findChild(QLineEdit, "paymentEdit")
         self.change_label = self.findChild(QLabel, "changeEdit")
-        self.add_button = self.findChild(QPushButton, "addButton")
+        self.confirm_button = self.findChild(QPushButton, "addButton")
         self.cancel_button = self.findChild(QPushButton, "cancelButton")
 
         self.order_table.setColumnCount(4)
         self.order_table.setHorizontalHeaderLabels(["Product Name", "Price", "Stock", "Quantity"])
-        self.products = {}
+        self.product_data = {}  # maps row index to product info
 
-        self.load_products()
+        self.populate_product_table()
+
         self.payment_edit.textChanged.connect(self.calculate_change)
-        self.add_button.clicked.connect(self.process_order)
+        self.confirm_button.clicked.connect(self.process_order)
         self.cancel_button.clicked.connect(self.cancel_order)
 
-    def load_products(self):
+        self.reload_graphs_callback = reload_graphs_callback #callback to  sa update ng orders in graphs
+
+    def populate_product_table(self):
         try:
             conn = mariadb.connect(**self.db_config)
             cursor = conn.cursor()
@@ -40,25 +46,23 @@ class MakeOrderWindow(QMainWindow):
             products = cursor.fetchall()
 
             self.order_table.setRowCount(0)
+            self.product_data.clear()
 
-            #load lang mga products na asa database
-            if products:
-                self.order_table.setRowCount(len(products))
+            for row, (product_id, name, price, stock) in enumerate(products):
+                self.order_table.insertRow(row)
+                self.product_data[row] = {"productId": product_id, "price": Decimal(str(price)), "stock": stock}
 
-                for row, (product_id, name, price, stock) in enumerate(products):
-                    #ensure product is valid
-                    if product_id not in self.products:
-                        self.products[row] = {"productId": product_id, "name": name, "price": price, "stock": stock}
+                for col, value in enumerate([name, f"{price:.2f}", stock]):
+                    item = QTableWidgetItem(str(value))
+                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                    self.order_table.setItem(row, col, item)
 
-                    self.order_table.setItem(row, 0, QTableWidgetItem(name))
-                    self.order_table.setItem(row, 1, QTableWidgetItem(str(price)))
-                    self.order_table.setItem(row, 2, QTableWidgetItem(str(stock)))
+                spin_box = QSpinBox()
+                spin_box.setRange(0, stock)
+                spin_box.valueChanged.connect(self.calculate_total)
+                self.order_table.setCellWidget(row, 3, spin_box)
 
-                    spin_box = QSpinBox()
-                    spin_box.setRange(0, stock)
-                    spin_box.valueChanged.connect(self.calculate_total)
-                    self.order_table.setCellWidget(row, 3, spin_box)
-
+            self.calculate_total()
         except Exception as e:
             QMessageBox.critical(self, "Error loading products", str(e))
         finally:
@@ -67,110 +71,104 @@ class MakeOrderWindow(QMainWindow):
                 conn.close()
 
     def calculate_total(self):
-        total = 0
+        total = Decimal("0.00")
         for row in range(self.order_table.rowCount()):
             try:
-                price = float(self.order_table.item(row, 1).text())
                 quantity = self.order_table.cellWidget(row, 3).value()
+                price = self.product_data[row]["price"]
                 total += price * quantity
-            except:
-                pass
+            except Exception:
+                continue
 
-        if self.total_label:
-            self.total_label.setText(f"Total: {total:.2f}")
+        self.total_label.setText(f"Total: {total:.2f}")
         self.calculate_change()
 
     def calculate_change(self):
         try:
-            total = float(self.total_label.text().replace("Total: ", ""))
-            payment = float(self.payment_edit.text())
+            total = Decimal(self.total_label.text().replace("Total: ", ""))
+            payment = Decimal(self.payment_edit.text())
             change = payment - total
             self.change_label.setText(f"Change: {change:.2f}")
 
             if change < 0 and not self.low_payment_warned:
-                QMessageBox.warning(self, "Insufficient Payment", "Please enter a proper bill for this order.")
+                QMessageBox.warning(self, "Insufficient Payment", "Please enter enough money for this order.")
                 self.low_payment_warned = True
             elif change >= 0:
                 self.low_payment_warned = False
-        except ValueError:
+        except (InvalidOperation, ValueError):
             self.change_label.setText("")
             self.low_payment_warned = False
 
     def process_order(self):
-        order_summary_lines = []
-        total_price = 0.0
-        order_details = []#container for order_details
-
         try:
-            conn = mariadb.connect(**self.db_config)
-            cursor = conn.cursor()
+            total_price = Decimal("0.00")
+            order_details = []
 
-            #get existing productIds from the products table
-            cursor.execute("SELECT productId FROM products WHERE userId = ?", (self.user_id,))
-            valid_product_ids = set(row[0] for row in cursor.fetchall()) #get valid pId
-
-            #check kung existed yunng productid sa products
             for row in range(self.order_table.rowCount()):
                 quantity = self.order_table.cellWidget(row, 3).value()
                 if quantity > 0:
-                    product_name = self.order_table.item(row, 0).text()
-                    price = float(self.order_table.item(row, 1).text())
-                    total_price += price * quantity
-                    order_summary_lines.append(f"{product_name} x {quantity} - {price * quantity:.2f}")
-                    product_id = self.products[row]['productId']
+                    product_info = self.product_data[row]
+                    product_id = product_info["productId"]
+                    price = product_info["price"]
+                    total = price * quantity
+                    total_price += total
+                    order_details.append((product_id, quantity, total))
 
-                    if product_id not in valid_product_ids:
-                        raise ValueError(f"Product with ID {product_id} has been removed or no longer exists.")
-
-                    #get details
-                    order_details.append((product_id, quantity, price * quantity))
-
-            if order_summary_lines:
-                summary_text = "\n".join(order_summary_lines)
-                print("Ordered Products:\n" + summary_text)
-                QMessageBox.information(self, "Order Processed", "Products added to the order summary.")
-
-                try:
-                    #insert 
-                    cursor.execute("""
-                        INSERT INTO orders (userId, totalPrice, totalMoney, changeAmount, orderDateTime)
-                        VALUES (?, ?, ?, ?, NOW())
-                    """, (
-                        self.user_id, total_price, total_price, float(self.change_label.text().replace("Change: ", "")) if self.change_label.text() else 0.0
-                    ))
-
-                    order_id = cursor.lastrowid #dito makukuha yung nagenerate na orders per id
-
-                    #insert process
-                    for product_id, quantity, total_price in order_details:
-                        cursor.execute("""
-                            INSERT INTO order_details (orderId, productId, quantity, totalPrice)
-                            VALUES (?, ?, ?, ?)
-                        """, (
-                            order_id, product_id, quantity, total_price
-                        ))
-
-                    conn.commit()
-
-                except Exception as e:
-                    QMessageBox.critical(self, "Error processing order", str(e))
-
-                #remove yung quantity sa spinbox
-                for row in range(self.order_table.rowCount()):
-                    self.order_table.cellWidget(row, 3).setValue(0)
-
-                #reset after ng sucessful order
-                self.total_label.setText("Total: 0.00")
-                self.payment_edit.clear()
-                self.change_label.setText("Change: 0.00")
-
-            else:
+            if not order_details:
                 QMessageBox.warning(self, "No Products Selected", "Please select at least one product.")
+                return
+
+            try:
+                payment = Decimal(self.payment_edit.text())
+                if payment < total_price:
+                    QMessageBox.warning(self, "Insufficient Payment", "Payment must be at least equal to total.")
+                    return
+            except (InvalidOperation, ValueError):
+                QMessageBox.warning(self, "Invalid Payment", "Please enter a valid numeric payment amount.")
+                return
+
+            conn = mariadb.connect(**self.db_config)
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                INSERT INTO orders (userId, totalPrice, totalMoney, changeAmount, orderDateTime)
+                VALUES (?, ?, ?, ?, NOW())
+            """, (
+                self.user_id,
+                total_price,
+                payment,
+                payment - total_price
+            ))
+
+            order_id = cursor.lastrowid
+
+            for product_id, quantity, total in order_details:
+                cursor.execute("""
+                    INSERT INTO order_details (orderId, productId, quantity, totalPrice)
+                    VALUES (?, ?, ?, ?)
+                """, (order_id, product_id, quantity, total))
+
+                cursor.execute("""
+                    UPDATE products
+                    SET stock = stock - ?
+                    WHERE productId = ?
+                """, (quantity, product_id))
+
+            conn.commit()
+            QMessageBox.information(self, "Order Success", "Order has been processed successfully.")
+            self.populate_product_table()
+            self.payment_edit.clear()
+            self.change_label.setText("Change: 0.00")
+            
+            if self.reload_graphs_callback:
+                self.reload_graphs_callback()    
 
         except Exception as e:
-            QMessageBox.critical(self, "Error", str(e))
+            QMessageBox.critical(self, "Order Error", str(e))
         finally:
+            self.dashboard_window.update_graphs_on_new_order()
             if 'conn' in locals() and conn:
+                cursor.close()
                 conn.close()
 
     def cancel_order(self):
@@ -180,10 +178,8 @@ class MakeOrderWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
     from dashboard_window import DashboardWindow
     dashboard = DashboardWindow()
-    order_window = MakeOrderWindow(user_id=1, db_config=db_config, dashboard_window=dashboard)
-    order_window.show()
-
+    window = MakeOrderWindow(user_id=1, db_config=db_config, dashboard_window=dashboard)
+    window.show()
     sys.exit(app.exec())
