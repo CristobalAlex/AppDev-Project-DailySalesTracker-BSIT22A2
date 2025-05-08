@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
+    <width>882</width>
     <height>487</height>
    </rect>
   </property>
@@ -14,24 +14,24 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
-</string>
+   <string notr="true">background-color:rgb(96, 181, 255);</string>
   </property>
   <widget class="QComboBox" name="choices">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>101</width>
+     <x>20</x>
+     <y>20</y>
+     <width>131</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(33, 113, 181);
+    <string notr="true">background-color: rgb(58, 141, 255);
 color:rgb(251, 243, 242);
 font: 75 10pt &quot;Eras Bold ITC&quot;;
 border: 0.5px solid #1C768F;
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:11px;</string>
    </property>
    <item>
     <property name="text">
@@ -52,10 +52,10 @@ border-radius: 8px;</string>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>130</y>
-     <width>401</width>
-     <height>291</height>
+     <x>20</x>
+     <y>110</y>
+     <width>801</width>
+     <height>301</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -71,18 +71,19 @@ border-radius:20px;</string>
    <widget class="QLabel" name="fullnameLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>80</x>
       <y>30</y>
-      <width>91</width>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
+     <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:7px;</string>
     </property>
     <property name="text">
      <string> Fullname</string>
@@ -91,18 +92,19 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="usernameLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>80</x>
       <y>70</y>
-      <width>91</width>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
+     <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:7px;</string>
     </property>
     <property name="text">
      <string> Username</string>
@@ -111,54 +113,56 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>80</x>
       <y>110</y>
-      <width>91</width>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);
-color:rgb(3, 37, 57);
+     <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:3px;</string>
     </property>
     <property name="text">
-     <string> Password</string>
+     <string>  Password</string>
     </property>
    </widget>
    <widget class="QLabel" name="genderLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>91</width>
+      <x>80</x>
+      <y>190</y>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
+     <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:7px;</string>
     </property>
     <property name="text">
-     <string> Gender</string>
+     <string>   Gender</string>
     </property>
    </widget>
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>50</x>
       <y>20</y>
-      <width>111</width>
+      <width>251</width>
       <height>251</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;</string>
+     <string notr="true">background-color:rgb(255, 255, 255);</string>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -167,18 +171,19 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="createdOnLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>220</y>
-      <width>91</width>
+      <x>80</x>
+      <y>230</y>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
+     <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:4px;</string>
     </property>
     <property name="text">
      <string>Created On</string>
@@ -187,16 +192,19 @@ border-radius: 8px;</string>
    <widget class="QPushButton" name="editPasswordBtn">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>80</x>
       <y>150</y>
-      <width>91</width>
-      <height>23</height>
+      <width>121</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;
-color:rgb(251, 243, 242);</string>
+font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+border-radius: 6px;
+color:rgb(251, 243, 242);
+background-color:rgb(85, 170, 127);
+padding-left:5px;</string>
     </property>
     <property name="text">
      <string>Edit password</string>
@@ -205,14 +213,14 @@ color:rgb(251, 243, 242);</string>
    <widget class="QLabel" name="name">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>390</x>
       <y>30</y>
-      <width>201</width>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -225,14 +233,14 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="username">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>390</x>
       <y>70</y>
-      <width>201</width>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -245,14 +253,14 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="password">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>390</x>
       <y>110</y>
-      <width>201</width>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -265,14 +273,14 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="gender">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>180</y>
-      <width>201</width>
+      <x>390</x>
+      <y>190</y>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -285,14 +293,14 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="accountDateCreated">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>220</y>
-      <width>201</width>
+      <x>390</x>
+      <y>230</y>
+      <width>351</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -318,27 +326,29 @@ border-radius: 8px;</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>90</y>
-     <width>281</width>
-     <height>20</height>
+     <x>280</x>
+     <y>20</y>
+     <width>251</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-color:rgb(8, 48, 107);
+    <string notr="true">color:rgb(255, 236, 219);
 font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
    </property>
    <property name="text">
-    <string>Here are your Account Information</string>
+    <string>ACCOUNT INFORMATION</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="logoutBtn">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>430</y>
-     <width>141</width>
+     <x>30</x>
+     <y>420</y>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -347,12 +357,40 @@ font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(33, 113, 181);</string>
+background-color: rgb(58, 141, 255);</string>
    </property>
    <property name="text">
     <string>Sign Out</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 255, 255);
+font: 75 10pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Here are your account information. To change your old password,click the edit password button to redirect to change password form.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>frame</zorder>
+  <zorder>choices</zorder>
+  <zorder>label</zorder>
+  <zorder>logoutBtn</zorder>
+  <zorder>label_2</zorder>
  </widget>
  <resources/>
  <connections/>
