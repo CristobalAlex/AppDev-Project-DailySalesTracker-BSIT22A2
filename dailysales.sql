@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 11:10 PM
+-- Generation Time: May 08, 2025 at 05:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -43,7 +43,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orderId`, `productId`, `userId`, `quantity`, `totalPrice`, `totalMoney`, `changeAmount`, `orderDateTime`) VALUES
-(13, 0, 10, 0, 52.00, 52.00, 48.00, '2025-05-06 04:06:05');
+(23, 0, 12, 0, 22.00, 50.00, 28.00, '2025-05-08 23:46:09');
 
 -- --------------------------------------------------------
 
@@ -64,8 +64,8 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`orderDetailId`, `orderId`, `productId`, `quantity`, `totalPrice`) VALUES
-(12, 13, 9, 2, 28.00),
-(13, 13, 10, 3, 24.00);
+(27, 23, 13, 1, 12.00),
+(28, 23, 14, 1, 10.00);
 
 -- --------------------------------------------------------
 
@@ -87,8 +87,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productId`, `productName`, `price`, `stock`, `userId`, `purchasePrice`) VALUES
-(9, 'milk per piece', 14.00, 4, 10, 9.00),
-(10, 'shampoo per piece', 8.00, 6, 10, 5.60);
+(13, 'Pencil Mongol 2 Small', 12.00, 4, 12, 10.00),
+(14, 'HBQ Ballpen Black Per Piece', 10.00, 9, 12, 8.00);
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `name`, `username`, `password`, `gender`, `accountDateCreated`, `uniqueToken`) VALUES
-(10, 'qq', 'qq', 'c8ddd19825b500117bb205c85d77efb6ef8aefb5887d7ad56dcc07c4e9071016:ebe9d82cf9ebe13b0e5f1480a184c034', 'Male', '2025-05-06 00:50:14', '6213d76667aed03b981d779aa3325bca54fba28de7bbac695d289c443c067754:cecfa38ee5ab5a1626e42918666fa302');
+(12, 'Admin,Admin,Admin', 'admin', '720cdb8f1bd8660ac2c0d8bf64cc71d8d63d311a5baf6d286098b033585e9824:28fa3fb0229e8cc58af0dbc6981681e0', 'Male', '2025-05-08 23:44:15', '2a14d1fd006dba67b57d9d33a313e8879d44ecdecd842ccab77a1746b26c6464:e83835e7d35ee1e6e4f11aa4b67a0ca9');
 
 --
 -- Indexes for dumped tables
@@ -155,25 +155,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `orderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
