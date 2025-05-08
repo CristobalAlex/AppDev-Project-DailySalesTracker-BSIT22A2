@@ -6,15 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
-    <height>487</height>
+    <width>473</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
+   <string notr="true">background-color:rgb(96, 181, 255);
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -22,8 +23,8 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>220</y>
-      <width>141</width>
+      <y>280</y>
+      <width>121</width>
       <height>31</height>
      </rect>
     </property>
@@ -41,34 +42,33 @@ background-color:rgb(255, 87, 87);</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
+      <x>30</x>
+      <y>40</y>
       <width>281</width>
-      <height>20</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color:rgb(8, 48, 107);
-font: 75 12pt &quot;Verdana&quot;;</string>
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add Product here&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD PRODUCT HERE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>60</y>
-      <width>331</width>
+      <x>30</x>
+      <y>70</y>
+      <width>351</width>
       <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color:rgb(8, 48, 107);
-font: 75 10pt &quot;Verdana&quot;;</string>
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 10pt &quot;Verdana&quot;;
+</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can add your product here just click the add &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -77,15 +77,15 @@ font: 75 10pt &quot;Verdana&quot;;</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>80</y>
-      <width>331</width>
+      <x>30</x>
+      <y>100</y>
+      <width>271</width>
       <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">
-color:rgb(8, 48, 107);
+color:rgb(255, 236, 219);
 font: 75 10pt &quot;Verdana&quot;;</string>
     </property>
     <property name="text">
@@ -95,10 +95,10 @@ font: 75 10pt &quot;Verdana&quot;;</string>
    <widget class="QPushButton" name="addProductBtn">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>120</y>
-      <width>141</width>
-      <height>31</height>
+      <x>90</x>
+      <y>150</y>
+      <width>261</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -106,7 +106,7 @@ font: 75 10pt &quot;Verdana&quot;;</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(33, 113, 181);</string>
+background-color: rgb(58, 141, 255);</string>
     </property>
     <property name="text">
      <string>Add Product</string>
@@ -115,10 +115,10 @@ background-color:rgb(33, 113, 181);</string>
    <widget class="QPushButton" name="showProductsBtn">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>170</y>
-      <width>141</width>
-      <height>31</height>
+      <x>90</x>
+      <y>200</y>
+      <width>261</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -126,7 +126,7 @@ background-color:rgb(33, 113, 181);</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(33, 113, 181);</string>
+background-color: rgb(58, 141, 255);</string>
     </property>
     <property name="text">
      <string>Show Products</string>
