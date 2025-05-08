@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>837</width>
-    <height>485</height>
+    <width>881</width>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
+   <string notr="true">background-color:rgb(96, 181, 255);
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -23,7 +23,7 @@
      <rect>
       <x>20</x>
       <y>260</y>
-      <width>621</width>
+      <width>601</width>
       <height>161</height>
      </rect>
     </property>
@@ -34,6 +34,11 @@ font: 75 8pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
     </property>
+    <column>
+     <property name="text">
+      <string>New Column</string>
+     </property>
+    </column>
     <column>
      <property name="text">
       <string>Order ID</string>
@@ -51,7 +56,7 @@ border-radius: 8px;</string>
     </column>
     <column>
      <property name="text">
-      <string>Total Retail Sales</string>
+      <string>Total Sales</string>
      </property>
     </column>
     <column>
@@ -63,9 +68,9 @@ border-radius: 8px;</string>
    <widget class="QPushButton" name="exportPdfButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>20</y>
-      <width>171</width>
+      <x>310</x>
+      <y>430</y>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
@@ -74,7 +79,7 @@ border-radius: 8px;</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(255, 87, 87);</string>
+background-color:rgb(255, 145, 73);</string>
     </property>
     <property name="text">
      <string>Print with Pdf</string>
@@ -84,8 +89,8 @@ background-color:rgb(255, 87, 87);</string>
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>20</y>
-      <width>171</width>
+      <y>430</y>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
@@ -94,7 +99,7 @@ background-color:rgb(255, 87, 87);</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(255, 87, 87);</string>
+background-color:rgb(255, 145, 73);</string>
     </property>
     <property name="text">
      <string>Print with Excel</string>
@@ -104,13 +109,10 @@ background-color:rgb(255, 87, 87);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
-      <width>621</width>
+      <y>70</y>
+      <width>601</width>
       <height>181</height>
      </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color:rgb(251, 243, 242);;
@@ -128,7 +130,7 @@ border-radius: 8px;</string>
      <rect>
       <x>20</x>
       <y>430</y>
-      <width>171</width>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
@@ -143,46 +145,65 @@ background-color:rgb(255, 87, 87);</string>
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QLabel" name="totalPurchaseLabel">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>110</y>
-      <width>151</width>
-      <height>41</height>
+      <x>0</x>
+      <y>0</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
-font: 75 10pt &quot;Verdana&quot;;
-border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
-     <string/>
+     <string>SALES REPORT</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>90</y>
-      <width>111</width>
-      <height>16</height>
+      <x>20</x>
+      <y>30</y>
+      <width>511</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);
+font: 75 10pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Price Purchase&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can view detailed sales data, track performance, and analyze trends.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="totalSalesLabel">
+   <widget class="QLabel" name="dateLabel">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>180</y>
-      <width>151</width>
-      <height>41</height>
+      <x>620</x>
+      <y>30</y>
+      <width>251</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -200,22 +221,82 @@ border-radius: 8px;</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>160</y>
-      <width>101</width>
+      <y>150</y>
+      <width>111</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Retail Sales&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Price Purchase&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="searchHistory">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>100</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 8pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="totalPurchaseLabel">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>170</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="totalIncomeLabel">
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>250</y>
-      <width>151</width>
-      <height>41</height>
+      <y>310</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(251, 243, 242);;
+color:rgb(3, 37, 57);
+font: 75 10pt &quot;Verdana&quot;;
+border: 1px solid rgb(28, 118, 143);
+border-radius: 8px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="totalSalesLabel">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>240</y>
+      <width>181</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -233,7 +314,7 @@ border-radius: 8px;</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>230</y>
+      <y>290</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -242,24 +323,30 @@ border-radius: 8px;</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Income&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="dateLabel">
+   <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>251</width>
-      <height>31</height>
+      <x>670</x>
+      <y>220</y>
+      <width>101</width>
+      <height>16</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
-color:rgb(3, 37, 57);
-font: 75 10pt &quot;Verdana&quot;;
-border: 1px solid rgb(28, 118, 143);
-border-radius: 8px;</string>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Retail Sales&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>80</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search Product&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
