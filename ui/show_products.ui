@@ -6,25 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
-    <height>485</height>
+    <width>881</width>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
+   <string notr="true">background-color:rgb(96, 181, 255);
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="productsTable">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>621</width>
-      <height>381</height>
+      <x>50</x>
+      <y>100</y>
+      <width>721</width>
+      <height>311</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -68,9 +68,9 @@ border-radius: 8px;</string>
    <widget class="QPushButton" name="cancelBtn">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>440</y>
-      <width>171</width>
+      <x>40</x>
+      <y>430</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
@@ -82,15 +82,67 @@ color:rgb(251, 243, 242);
 background-color:rgb(255, 87, 87);</string>
     </property>
     <property name="text">
-     <string>Cancel</string>
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="titlelabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
+    </property>
+    <property name="text">
+     <string>PRODUCTS</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="descrplabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>561</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);
+font: 75 10pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can view, edit product information, or remove products from your catalog.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="searchInput">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>261</width>
+      <x>150</x>
+      <y>60</y>
+      <width>221</width>
       <height>31</height>
      </rect>
     </property>
@@ -105,6 +157,32 @@ border-radius: 8px;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="searchlabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;Eras  ITC&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Search Product Name:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>productsTable</zorder>
+   <zorder>cancelBtn</zorder>
+   <zorder>titlelabel</zorder>
+   <zorder>descrplabel</zorder>
+   <zorder>searchlabel</zorder>
+   <zorder>searchInput</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
