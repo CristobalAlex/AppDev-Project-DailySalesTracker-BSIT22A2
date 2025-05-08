@@ -1,6 +1,7 @@
 import hashlib
 import os
 import sys
+import re #used for not  accepting random charac
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QMessageBox, QApplication, QLineEdit
 from PyQt6.QtGui import QMouseEvent
@@ -23,7 +24,10 @@ class RegisterWindow(QMainWindow):
         password = self.password.text()
         gender = self.gender.currentText()
         unique_token = self.uniqueToken.text().strip()
-
+        #bawal special characters or number
+        if not re.fullmatch(r"[A-Za-z\s,]+", name):
+            QMessageBox.warning(self, "Invalid Name", "Full name must only contain letters, spaces, or commas.")
+            return
         if not name or not username or not password or not unique_token:
             QMessageBox.warning(self, "Missing Info", "Please fill in all fields.")
             return
@@ -36,21 +40,19 @@ class RegisterWindow(QMainWindow):
                 QMessageBox.warning(self, "Error", "Username already exists.")
                 return
 
-            # Hash password
+            #hash password
             salt = os.urandom(16)
             encrypted_password = hashlib.pbkdf2_hmac(
                 'sha256', password.encode('utf-8'), salt, 10000
             )
             password_to_store = encrypted_password.hex() + ":" + salt.hex()
 
-            # Hash unique token
+            #hash unique token
             token_salt = os.urandom(16)
             encrypted_token = hashlib.pbkdf2_hmac(
                 'sha256', unique_token.encode('utf-8'), token_salt, 10000
             )
             unique_token_to_store = encrypted_token.hex() + ":" + token_salt.hex()
-
-            # Insert into database
             query = """
                 INSERT INTO user (name, username, password, gender, uniqueToken)
                 VALUES (?, ?, ?, ?, ?)
