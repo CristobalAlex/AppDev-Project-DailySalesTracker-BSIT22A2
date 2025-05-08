@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QPushButton, QMainWindow, QApplication, QMessageBox, QLineEdit, QSpinBox
+    QPushButton, QMainWindow, QMessageBox, QLineEdit, QSpinBox
 )
 import mariadb
 from PyQt6 import uic
@@ -45,6 +45,7 @@ class AddProductForm(QMainWindow):
                 )
                 conn.commit()
                 QMessageBox.information(self, "Success", "Product added successfully!")
+                self.clear_fields()
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
             finally:
@@ -53,6 +54,12 @@ class AddProductForm(QMainWindow):
                     conn.close()
         else:
             QMessageBox.critical(self, "Error", "Please fill in all fields.")
+
+    def clear_fields(self):
+        self.product_name_input.clear()
+        self.price_input.clear()
+        self.purchase_price_input.clear()
+        self.stock_input.setValue(1)
 
     def go_back(self):
         self.close()
