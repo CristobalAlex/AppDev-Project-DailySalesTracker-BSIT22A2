@@ -6,25 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
+    <width>647</width>
     <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
+   <string notr="true">background-color:rgb(96, 181, 255);
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>100</x>
       <y>130</y>
-      <width>401</width>
-      <height>281</height>
+      <width>461</width>
+      <height>271</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -37,18 +40,18 @@ border-radius:20px;</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="productnamelabel">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>60</x>
        <y>30</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);
-color:rgb(3, 37, 57);
+      <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(251, 243, 242);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
@@ -60,51 +63,54 @@ border-radius: 8px;</string>
     <widget class="Line" name="line">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>50</x>
        <y>20</y>
        <width>151</width>
-       <height>181</height>
+       <height>171</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);;</string>
+      <string notr="true">background-color:rgb(255, 255, 255);</string>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
-    <widget class="QLabel" name="newPassword_2">
+    <widget class="QLabel" name="costlabel">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>150</y>
+       <x>60</x>
+       <y>110</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);
-color:rgb(3, 37, 57);
+      <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(251, 243, 242);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Price&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Cost Price&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLabel" name="newPassword_4">
+    <widget class="QLabel" name="quantitylabel">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>60</x>
        <y>70</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);
-color:rgb(3, 37, 57);
+      <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(251, 243, 242);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
@@ -116,31 +122,31 @@ border-radius: 8px;</string>
     <widget class="QLineEdit" name="productNameInput">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>240</x>
        <y>30</y>
        <width>191</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);;
+      <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="priceInput">
+    <widget class="QLineEdit" name="purchasePriceInput">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>150</y>
+       <x>240</x>
+       <y>110</y>
        <width>191</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);;
+      <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -150,14 +156,14 @@ border-radius: 8px;</string>
     <widget class="QSpinBox" name="stockInput">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>240</x>
        <y>70</y>
        <width>81</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);;
+      <string notr="true">background-color:rgb(255, 255, 255);
 color:rgb(3, 37, 57);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -167,8 +173,8 @@ border-radius: 8px;</string>
     <widget class="QPushButton" name="backBtn">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>210</y>
+       <x>50</x>
+       <y>200</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -181,34 +187,57 @@ color:rgb(251, 243, 242);
 background-color:rgb(255, 87, 87);</string>
      </property>
      <property name="text">
-      <string>Cancel</string>
+      <string>Back</string>
      </property>
     </widget>
-    <widget class="QLabel" name="newPassword_3">
+    <widget class="QPushButton" name="saveBtn">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>110</y>
-       <width>131</width>
+       <x>200</x>
+       <y>200</y>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(251, 243, 242);
-color:rgb(3, 37, 57);
+      <string notr="true">border: 1px solid rgb(28, 118, 143);
+font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+border-radius: 8px;
+color:rgb(251, 243, 242);
+background-color: rgb(58, 141, 255);</string>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="retaillabel">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>150</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(58, 141, 255);
+color:rgb(251, 243, 242);
 font: 75 10pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
 border-radius: 8px;</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Purchase Price&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Retail Price&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="purchasePriceInput">
+    <widget class="QLineEdit" name="priceInput">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>110</y>
+       <x>240</x>
+       <y>150</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -222,70 +251,55 @@ border-radius: 8px;</string>
      </property>
     </widget>
     <zorder>line</zorder>
-    <zorder>label_4</zorder>
-    <zorder>newPassword_2</zorder>
-    <zorder>newPassword_4</zorder>
+    <zorder>productnamelabel</zorder>
+    <zorder>costlabel</zorder>
+    <zorder>quantitylabel</zorder>
     <zorder>productNameInput</zorder>
-    <zorder>priceInput</zorder>
+    <zorder>purchasePriceInput</zorder>
     <zorder>stockInput</zorder>
     <zorder>backBtn</zorder>
-    <zorder>newPassword_3</zorder>
-    <zorder>purchasePriceInput</zorder>
-   </widget>
-   <widget class="QPushButton" name="saveBtn">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>340</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border: 1px solid rgb(28, 118, 143);
-font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-border-radius: 8px;
-color:rgb(251, 243, 242);
-background-color:rgb(33, 113, 181);</string>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
+    <zorder>saveBtn</zorder>
+    <zorder>retaillabel</zorder>
+    <zorder>priceInput</zorder>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>70</y>
-      <width>281</width>
-      <height>20</height>
+      <x>230</x>
+      <y>40</y>
+      <width>221</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color:rgb(8, 48, 107);
-font: 75 12pt &quot;Verdana&quot;;</string>
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add products here.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ADD PRODUCT HERE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>391</width>
-      <height>20</height>
+      <x>100</x>
+      <y>70</y>
+      <width>491</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color:rgb(8, 48, 107);
-font: 75 10pt &quot;Verdana&quot;;</string>
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter a correct product name, price, and quantity&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
