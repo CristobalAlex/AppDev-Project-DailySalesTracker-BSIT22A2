@@ -6,25 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>485</height>
+    <width>880</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
-</string>
+   <string notr="true">background-color:rgb(96, 181, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="orderTable">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>421</width>
-      <height>381</height>
+      <x>30</x>
+      <y>70</y>
+      <width>521</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -58,14 +57,14 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="totalAmountEdit">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>110</y>
-      <width>171</width>
+      <x>630</x>
+      <y>190</y>
+      <width>191</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(251, 243, 242);
 color:rgb(3, 37, 57);
 font: 75 8pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -78,9 +77,9 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="changeEdit">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>240</y>
-      <width>171</width>
+      <x>630</x>
+      <y>310</y>
+      <width>191</width>
       <height>31</height>
      </rect>
     </property>
@@ -98,27 +97,31 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>90</y>
-      <width>81</width>
+      <x>630</x>
+      <y>170</y>
+      <width>111</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;Eras  ITC&quot;;
+</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Total Amount:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Total Amount:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="paymentEdit">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>180</y>
-      <width>171</width>
+      <x>630</x>
+      <y>250</y>
+      <width>191</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(251, 243, 242);;
+     <string notr="true">background-color:rgb(251, 243, 242);
 color:rgb(3, 37, 57);
 font: 75 8pt &quot;Verdana&quot;;
 border: 1px solid rgb(28, 118, 143);
@@ -128,24 +131,32 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>150</y>
-      <width>81</width>
+      <x>630</x>
+      <y>230</y>
+      <width>101</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;Eras  ITC&quot;;
+</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Input Money:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Input Money:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>220</y>
+      <x>630</x>
+      <y>290</y>
       <width>81</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;Eras  ITC&quot;;
+</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Change:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -154,9 +165,9 @@ border-radius: 8px;</string>
    <widget class="QPushButton" name="cancelButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>430</y>
-      <width>171</width>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
@@ -168,15 +179,15 @@ color:rgb(251, 243, 242);
 background-color:rgb(255, 87, 87);</string>
     </property>
     <property name="text">
-     <string>Cancel</string>
+     <string>Back</string>
     </property>
    </widget>
    <widget class="QPushButton" name="addButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>200</x>
       <y>430</y>
-      <width>171</width>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
@@ -185,18 +196,70 @@ background-color:rgb(255, 87, 87);</string>
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 border-radius: 8px;
 color:rgb(251, 243, 242);
-background-color:rgb(255, 87, 87);</string>
+background-color:rgb(255, 145, 73);</string>
     </property>
     <property name="text">
      <string>Add</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 236, 219);
+font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
+    </property>
+    <property name="text">
+     <string>ORDERS</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>40</y>
+      <width>481</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);
+font: 75 10pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can create and submit new orders quickly and easily.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
    <widget class="QLineEdit" name="searchEdit">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>30</y>
-      <width>171</width>
+      <x>630</x>
+      <y>100</y>
+      <width>191</width>
       <height>31</height>
      </rect>
     </property>
@@ -211,17 +274,21 @@ border-radius: 8px;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>10</y>
-      <width>81</width>
+      <x>630</x>
+      <y>80</y>
+      <width>151</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;Eras  ITC&quot;;
+</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search Product&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search Product Name:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
