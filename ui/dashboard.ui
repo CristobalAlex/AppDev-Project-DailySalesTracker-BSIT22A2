@@ -6,31 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1077</width>
+    <width>881</width>
     <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(158, 202, 225);
+   <string notr="true">background-color:rgb(96, 181, 255);
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="productBtn">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>100</y>
-      <width>261</width>
-      <height>51</height>
+      <x>630</x>
+      <y>180</y>
+      <width>211</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(66, 146, 198);
+     <string notr="true">background-color:rgb(255, 255, 255);
 border-radius:20px;
-color:rgb(251, 243, 242);
+color: rgb(58, 141, 255);
 font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
@@ -40,16 +43,16 @@ font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
    <widget class="QPushButton" name="salesreportBtn">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>240</y>
-      <width>261</width>
-      <height>51</height>
+      <x>630</x>
+      <y>280</y>
+      <width>211</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(66, 146, 198);
+     <string notr="true">background-color:rgb(255, 255, 255);
 border-radius:20px;
-color:rgb(251, 243, 242);
+color: rgb(58, 141, 255);
 font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
@@ -59,37 +62,49 @@ font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
    <widget class="QPushButton" name="makeorderBtn">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>170</y>
-      <width>261</width>
-      <height>51</height>
+      <x>630</x>
+      <y>230</y>
+      <width>211</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(66, 146, 198);
+     <string notr="true">background-color:rgb(255, 255, 255);
 border-radius:20px;
-color:rgb(251, 243, 242);
+color: rgb(58, 141, 255);
 font: 75 10pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
-     <string>Make Oder</string>
+     <string>Make Order</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>30</y>
-      <width>251</width>
-      <height>21</height>
+      <x>160</x>
+      <y>0</y>
+      <width>391</width>
+      <height>81</height>
      </rect>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 75);
+     <string notr="true">color:rgb(255, 236, 219);
 font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
     </property>
     <property name="text">
-     <string>Welcome to Your Sales Tracker</string>
+     <string>WELCOME TO YOUR DAILY SALES TRACKER</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QComboBox" name="choices">
@@ -97,16 +112,20 @@ font: 75 12pt &quot;Eras Bold ITC&quot;;</string>
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>101</width>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(33, 113, 181);
+     <string notr="true">background-color: rgb(58, 141, 255);
 color:rgb(251, 243, 242);
 font: 75 10pt &quot;Eras Bold ITC&quot;;
 border: 0.5px solid #1C768F;
-border-radius: 8px;</string>
+border-radius: 8px;
+padding-left:11px;</string>
+    </property>
+    <property name="currentText">
+     <string>Dashboard</string>
     </property>
     <item>
      <property name="text">
@@ -124,11 +143,53 @@ border-radius: 8px;</string>
      </property>
     </item>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>90</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);
+font: 75 10pt &quot;Verdana&quot;;
+font-weight:350;
+
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Using the DailySales tracker, you can add products, make orders, and track your sales history daily.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>230</y>
+      <width>121</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../product.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
    <widget class="QLabel" name="dateTimeLabel">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>20</y>
+      <x>610</x>
+      <y>40</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -147,10 +208,10 @@ border-radius: 8px;</string>
    <widget class="QWidget" name="monthlyOrdergraphWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>70</y>
-      <width>661</width>
-      <height>191</height>
+      <width>521</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -161,10 +222,10 @@ border-radius:20px;</string>
    <widget class="QWidget" name="graphorderwidget" native="true">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>270</y>
-      <width>661</width>
-      <height>191</height>
+      <x>30</x>
+      <y>260</y>
+      <width>521</width>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
