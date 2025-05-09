@@ -18,7 +18,7 @@ class ShowProductsWindow(QMainWindow):
         self.products_table.setColumnCount(6)
         self.products_table.setHorizontalHeaderLabels(["Product Name", "Price", "Stock", "Update Price", "Update Stock", "Remove"])
 
-        # ✅ Search Input
+        # search Input
         self.search_input = self.findChild(QLineEdit, "searchInput")
         if self.search_input:
             self.search_input.setClearButtonEnabled(True)
