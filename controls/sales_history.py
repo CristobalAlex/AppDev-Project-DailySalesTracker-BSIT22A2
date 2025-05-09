@@ -1,17 +1,19 @@
 import mariadb
 import pandas as pd
-import sys
 import os
 from PyQt6 import uic
-from fpdf import FPDF
 from decimal import Decimal
 from db.config import db_config
 from PyQt6.QtWidgets import (
-    QMainWindow, QApplication, QCalendarWidget, QTableWidget, QTableWidgetItem,
+    QMainWindow, QLineEdit, QCalendarWidget, QTableWidget, QTableWidgetItem,
     QPushButton, QMessageBox, QProgressDialog, QLabel
 )
 from PyQt6.QtCore import QDate, Qt, QThread, pyqtSignal
-
+#excel
+import openpyxl
+from openpyxl.styles import Alignment
+#pdf
+from fpdf import FPDF
 class SalesHistoryWindow(QMainWindow):
     def __init__(self, user_id, db_config, dashboard_window):
         super().__init__()
@@ -21,26 +23,28 @@ class SalesHistoryWindow(QMainWindow):
         self.db_config = db_config
         self.dashboard_window = dashboard_window
 
+        #connnection  to the ui elements
         self.calendar = self.findChild(QCalendarWidget, "calendarWidget")
         self.sales_table = self.findChild(QTableWidget, "salesTable")
         self.export_excel_button = self.findChild(QPushButton, "exportExcelButton")
         self.export_pdf_button = self.findChild(QPushButton, "exportPdfButton")
         self.back_button = self.findChild(QPushButton, "backButton")
-
-        # New QLabels for totals
         self.total_purchase_label = self.findChild(QLabel, "totalPurchaseLabel")
         self.total_sales_label = self.findChild(QLabel, "totalSalesLabel")
         self.total_income_label = self.findChild(QLabel, "totalIncomeLabel")
+        self.date_label = self.findChild(QLabel, "dateLabel")
+
+        self.search_history = self.findChild(QLineEdit, "searchHistory")
+        self.search_history.setClearButtonEnabled(True)
+        self.search_history.textChanged.connect(self.search_product)
 
         self.sales_table.setColumnCount(5)
         self.sales_table.setHorizontalHeaderLabels([
-        "Order ID", "Product Name", "Quantity", "Total Retail Sales", "Sales Date"
+            "Order ID", "Product Name", "Quantity", "Total Retail Sales", "Sales Date"
         ])
 
-        self.date_label = self.findChild(QLabel, "dateLabel")
         current_date = QDate.currentDate().toString("yyyy-MM-dd")
         self.date_label.setText(f"Date now: {current_date}")
-
 
         self.calendar.selectionChanged.connect(self.load_sales)
         self.export_excel_button.clicked.connect(self.export_to_excel)
@@ -83,7 +87,7 @@ class SalesHistoryWindow(QMainWindow):
             self.total_income_label.setText("Total Income: 0.00")
             return
 
-        order_sales = {}
+        self.order_sales = {}
         total_purchase = Decimal("0.00")
         total_sales = Decimal("0.00")
 
@@ -95,30 +99,93 @@ class SalesHistoryWindow(QMainWindow):
             total_sales += total_price
             total_purchase += purchase_price * Decimal(quantity)
 
-            if order_id not in order_sales:
-                order_sales[order_id] = {"products": [], "total_sales": Decimal("0.00")}
+            if order_id not in self.order_sales:
+                self.order_sales[order_id] = {
+                    "products": [],
+                    "total_sales": Decimal("0.00"),
+                    "sales_date": order_datetime.date()
+                }
 
-            order_sales[order_id]["products"].append((product_name, quantity))
-            order_sales[order_id]["total_sales"] += total_price
+            self.order_sales[order_id]["products"].append((product_name, quantity))
+            self.order_sales[order_id]["total_sales"] += total_price
 
-        for order_id, details in order_sales.items():
+        tallest_row_height = 0
+
+        for order_id, details in self.order_sales.items():
             products = ", ".join([p[0] for p in details["products"]])
             quantities = ", ".join([str(p[1]) for p in details["products"]])
             total = details["total_sales"]
+            sales_date = details["sales_date"]
 
             row_position = self.sales_table.rowCount()
             self.sales_table.insertRow(row_position)
+
+            product_item = QTableWidgetItem(products)
+            product_item.setTextAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+            self.sales_table.setItem(row_position, 1, product_item)
+
             self.sales_table.setItem(row_position, 0, QTableWidgetItem(str(order_id)))
-            self.sales_table.setItem(row_position, 1, QTableWidgetItem(products))
             self.sales_table.setItem(row_position, 2, QTableWidgetItem(quantities))
             self.sales_table.setItem(row_position, 3, QTableWidgetItem(f"{total:.2f}"))
-            self.sales_table.setItem(row_position, 4, QTableWidgetItem(str(order_datetime.date())))
+            self.sales_table.setItem(row_position, 4, QTableWidgetItem(str(sales_date)))
 
-        # Set QLabel values
+            self.sales_table.resizeRowsToContents()
+            row_height = self.sales_table.rowHeight(row_position)
+            if row_height > tallest_row_height:
+                tallest_row_height = row_height
+
+        for row in range(self.sales_table.rowCount()):
+            self.sales_table.setRowHeight(row, tallest_row_height)
+
         self.total_purchase_label.setText(f"{total_purchase:.2f}")
         self.total_sales_label.setText(f"{total_sales:.2f}")
         self.total_income_label.setText(f"{(total_sales - total_purchase):.2f}")
 
+    def search_product(self):
+        search_text = self.search_history.text().lower()
+
+        if not search_text:
+            self.load_sales_for_today()
+        else:
+            filtered_sales = []
+            for order_id, details in self.order_sales.items():
+                for product_name, quantity in details["products"]:
+                    if search_text in product_name.lower():
+                        filtered_sales.append((order_id, details))
+                        break
+            self.update_sales_table(filtered_sales)
+
+    def update_sales_table(self, filtered_sales):
+        self.sales_table.setRowCount(0)
+        tallest_row_height = 0#track yung tallest row
+
+        for order_id, details in filtered_sales:
+            products = "\n".join([p[0] for p in details["products"]])#\n for line  breaks
+            quantities = "\n".join([str(p[1]) for p in details["products"]])
+            total = details["total_sales"]
+            sales_date = details["sales_date"]
+
+            row_position = self.sales_table.rowCount()
+            self.sales_table.insertRow(row_position)
+
+            product_item = QTableWidgetItem(products)
+            product_item.setTextAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+            self.sales_table.setItem(row_position, 1, product_item)
+
+            self.sales_table.setItem(row_position, 0, QTableWidgetItem(str(order_id)))
+            self.sales_table.setItem(row_position, 2, QTableWidgetItem(quantities))
+            self.sales_table.setItem(row_position, 3, QTableWidgetItem(f"{total:.2f}"))
+            self.sales_table.setItem(row_position, 4, QTableWidgetItem(str(sales_date)))
+
+            self.sales_table.resizeRowsToContents()
+            row_height = self.sales_table.rowHeight(row_position)
+            if row_height > tallest_row_height:
+                tallest_row_height = row_height
+
+        #kada rows same sa tallest  row ang  allignment
+        for row in range(self.sales_table.rowCount()):
+            self.sales_table.setRowHeight(row, tallest_row_height)
+    #excel printing
     def export_to_excel(self):
         if self.sales_table.rowCount() == 0:
             QMessageBox.warning(self, "No Data", "No sales data to export.")
@@ -134,19 +201,33 @@ class SalesHistoryWindow(QMainWindow):
                 row_data = []
                 for column in range(self.sales_table.columnCount()):
                     item = self.sales_table.item(row, column)
-                    row_data.append(item.text() if item else "")
+                    text = item.text() if item else ""
+                    #newlines for 30 exceeded char
+                    if column == 1:
+                        text = '\n'.join([text[i:i+30] for i in range(0, len(text), 30)])
+                    row_data.append(text)
                 data.append(row_data)
 
             df = pd.DataFrame(data, columns=[
                 "Order ID", "Product Name", "Quantity", "Total Retail Sales", "Sales Date"
             ])
             df.to_excel(path, index=False)
+
+            #textwrapping
+            wb = openpyxl.load_workbook(path)
+            ws = wb.active
+
+            for row in ws.iter_rows(min_row=2, max_col=5, max_row=ws.max_row):
+                for cell in row:
+                    cell.alignment = Alignment(wrap_text=True, vertical='top')
+
+            wb.save(path)
             QMessageBox.information(self, "Export Successful", f"Saved to: {path}")
         except Exception as e:
             QMessageBox.critical(self, "Export Error", str(e))
-
+    #pdf printing 
     def export_to_pdf(self):
-        if self.sales_table.rowCount() == 0:
+        if not hasattr(self, "order_sales") or not self.order_sales:
             QMessageBox.warning(self, "No Data", "No sales data to export.")
             return
 
@@ -158,40 +239,50 @@ class SalesHistoryWindow(QMainWindow):
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=10)
-            col_widths = [30, 50, 30, 55, 40]
+
+            line_height = 6
+            col_widths = [25, 60, 30, 40, 35]
             headers = ["Order ID", "Product Name", "Quantity", "Total Retail Sales", "Sales Date"]
 
             for i, header in enumerate(headers):
-                pdf.cell(col_widths[i], 10, header, 1)
-            pdf.ln()
+                pdf.cell(col_widths[i], line_height, header, border=1)
+            pdf.ln(line_height)
 
-            for row in range(self.sales_table.rowCount()):
-                for col in range(self.sales_table.columnCount()):
-                    item = self.sales_table.item(row, col)
-                    text = item.text() if item else ""
-                    pdf.cell(col_widths[col], 10, text, 1)
-                pdf.ln()
+            for order_id, details in self.order_sales.items():
+                products = details["products"]
+                total_sales = details["total_sales"]
+                sales_date = str(details["sales_date"])
+
+                for i, (product, quantity) in enumerate(products):
+                    row_data = [
+                        str(order_id) if i == 0 else "",
+                        product,
+                        str(quantity),
+                        f"{total_sales:.2f}" if i == 0 else "",
+                        sales_date if i == 0 else ""
+                    ]
+                    for j, data in enumerate(row_data):
+                        pdf.cell(col_widths[j], line_height, data, border=1)
+                    pdf.ln(line_height)
 
             pdf.output(path)
-            QMessageBox.information(self, "Export Successful", f"Saved to: {path}")
+            QMessageBox.information(self, "Export Successful", f"PDF saved to: {path}")
         except Exception as e:
             QMessageBox.critical(self, "Export Error", str(e))
 
 
 class SalesLoaderThread(QThread):
     finished = pyqtSignal(list)
-
     def __init__(self, user_id, selected_date, db_config):
         super().__init__()
         self.user_id = user_id
         self.selected_date = selected_date
         self.db_config = db_config
-
+    #then select dito yung data sa db
     def run(self):
         try:
             conn = mariadb.connect(**self.db_config)
             cursor = conn.cursor()
-
             cursor.execute("""
                 SELECT o.orderId, p.productName, od.quantity, od.totalPrice, o.orderDateTime, p.purchasePrice
                 FROM order_details od
@@ -199,9 +290,7 @@ class SalesLoaderThread(QThread):
                 JOIN products p ON od.productId = p.productId
                 WHERE o.userId = ? AND DATE(o.orderDateTime) = ?
             """, (self.user_id, self.selected_date))
-
             sales_data = cursor.fetchall()
-
         except Exception as e:
             print("Error loading sales:", e)
             sales_data = []
@@ -210,3 +299,4 @@ class SalesLoaderThread(QThread):
                 cursor.close()
                 conn.close()
             self.finished.emit(sales_data)
+
