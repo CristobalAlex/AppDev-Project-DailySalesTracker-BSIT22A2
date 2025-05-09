@@ -267,7 +267,7 @@ font-size:15px;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../image/8659f6b7-f9a4-47df-bc83-79071203bbbd-removebg-preview.png</pixmap>
+     <pixmap>../image/logo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
