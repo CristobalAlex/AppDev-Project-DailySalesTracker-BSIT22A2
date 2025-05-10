@@ -24,10 +24,11 @@ class RegisterWindow(QMainWindow):
         password = self.password.text()
         gender = self.gender.currentText()
         unique_token = self.uniqueToken.text().strip()
-        #bawal special characters or number      
+        
         if not name or not username or not password or not unique_token:
             QMessageBox.warning(self, "Missing Info", "Please fill in all fields.")
             return
+        #bawal special characters or number      
         if not re.fullmatch(r"[A-Za-z\s,]+", name):
             QMessageBox.warning(self, "Invalid Name", "Full name must only contain letters, spaces, or commas.")
             return
